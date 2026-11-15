@@ -20,7 +20,6 @@ import { categoryOf } from '../../../shared/categories.js';
 import { LANGUAGES } from '../../../shared/languages.js';
 import { Button, Modal, PillIcon, Avatar, Spinner, useToast, usePolling, daysUntil, PART_STYLE } from '../ui.jsx';
 
-const PARTS = ['morning', 'afternoon', 'evening', 'night'];
 const FONT_SIZES = [18, 20, 23];
 
 function useNow(ms = 30000) {
@@ -552,7 +551,7 @@ function DoseRow({ d, t, faded }) {
   );
 }
 
-function NowCard({ t, code, current, next, lastTaken, data, now, onAct, onSkip, onListen, voiceLoading }) {
+function NowCard({ t, code, current, next, lastTaken, data, onAct, onSkip, onListen, voiceLoading }) {
   if (current) {
     const open = current.doses.filter((d) => d.status === 'due');
     const ids = open.map((d) => d.id);

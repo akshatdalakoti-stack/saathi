@@ -159,8 +159,13 @@ scripts/
 docs/                  demo GIF and MP4, screenshots
 ```
 
+### Quality checks
+- `npm run lint`: ESLint (flat config) for server, shared and React code, including the React hooks rules.
+- **CI**: GitHub Actions runs lint, unit tests and the production build on every push (`.github/workflows/ci.yml`).
+- **Security headers** on every response: Content-Security-Policy, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy.
+
 ### Testing
-`npm test` runs the **unit tests** in `tests/` with Node's built-in test runner. They cover BP and sugar safe ranges, routine labels, medicine categories, medicine validation, refill forecasts and the language fallback.
+`npm test` runs the **unit tests** in `tests/` with Node's built-in test runner. They cover PIN hashing, login lockout and permissions, BP and sugar safe ranges, routine labels, medicine categories, medicine validation, refill forecasts and the language fallback.
 
 `scripts/e2e.mjs` runs **42 end-to-end checks** against a running server. They cover access and permissions, elder approval, PIN lockout, the escalation ladder and one-tap email links, Hindi emails, voice intents in Tamil and Bengali, health alerts, refill pickup, the weekly summary, the visit sheet and the emergency card. All 42 pass on the live site.
 

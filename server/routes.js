@@ -61,11 +61,6 @@ function profileSummary(p) {
   };
 }
 
-function memberName(id) {
-  const m = one('SELECT name FROM members WHERE id = ?', id);
-  return m ? m.name : 'Someone';
-}
-
 function cleanPin(pin) {
   const text = String(pin || '').trim();
   if (!/^\d{4,6}$/.test(text)) throw new HttpError(400, 'A PIN is 4 to 6 numbers.');

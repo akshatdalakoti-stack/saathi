@@ -14,6 +14,32 @@ import { geminiReady } from './gemini.js';
 
 const app = express();
 app.set('trust proxy', 1);
+app.disable('x-powered-by');
+
+// Security headers on every response. The CSP allows only this site, Google Fonts,
+// data: images (QR codes) and blob: audio (spoken reminders).
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self'",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data: blob:",
+  "media-src 'self' blob:",
+  "connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com",
+  "frame-src 'self'",
+  "frame-ancestors 'self'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "object-src 'none'",
+].join('; ');
+app.use((req, res, next) => {
+  res.setHeader('Content-Security-Policy', CSP);
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'camera=(self), microphone=(self), geolocation=()');
+  next();
+});
 app.use(express.json({ limit: '8mb' }));
 app.use(express.urlencoded({ extended: false }));
 
