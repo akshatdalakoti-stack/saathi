@@ -6,6 +6,10 @@ import { actOnDoses, readMed, amountText, foodText, circle, callName, safeJson }
 import { esc, unsureDose } from './notify.js';
 import { niceTime, localTime } from './time.js';
 import { categoryOf } from '../shared/categories.js';
+import { startSession } from './auth.js';
+import { elderOf } from './logic.js';
+import { DEMO_MODE } from './env.js';
+import { seedDemo, DEMO_CARE_ID } from './seed.js';
 
 export const pages = express.Router();
 
@@ -92,6 +96,24 @@ pages.post('/act/:token', (req, res) => {
   res.send(page('Done', `${tick}<h1>${label.done}</h1>
     <p class="muted">${row.action === 'taken' ? `Well done, ${esc(callName(profile))}. Your family can see it.` : 'Thank you for letting us know.'}</p>
     <div class="card">${doseRows(doses)}</div><a class="btn light" href="/">Open Saathi</a>`));
+});
+
+// One-click demo links for judges, e.g. /demo/elder or /demo/ravi?next=/care/health
+const DEMO_PEOPLE = { elder: null, ravi: 'Ravi Sharma', priya: 'Priya Nair', anjali: 'Anjali Sharma' };
+pages.get('/demo/:as', (req, res) => {
+  if (!DEMO_MODE || !(req.params.as in DEMO_PEOPLE)) return res.redirect('/');
+  let profile = one('SELECT * FROM profiles WHERE care_id = ?', DEMO_CARE_ID);
+  if (!profile) {
+    seedDemo();
+    profile = one('SELECT * FROM profiles WHERE care_id = ?', DEMO_CARE_ID);
+  }
+  const who = DEMO_PEOPLE[req.params.as];
+  const member = who ? one('SELECT * FROM members WHERE profile_id = ? AND name = ?', profile.id, who) : elderOf(profile.id);
+  if (!member) return res.redirect('/');
+  startSession(res, member.id, 7);
+  const next = String(req.query.next || '');
+  const safeNext = next.startsWith('/') && !next.startsWith('//') ? next : null;
+  res.redirect(safeNext || (member.role === 'elder' ? '/elder' : '/care'));
 });
 
 // Emergency card: for a paramedic or a neighbour who scans the QR code on the fridge.

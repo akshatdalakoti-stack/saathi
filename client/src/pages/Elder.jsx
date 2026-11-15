@@ -367,7 +367,7 @@ export default function Elder() {
           <span className="text-6xl leading-none" aria-hidden>{PART_EMOJI[part]}</span>
           <div className="min-w-0">
             <p className="text-lg text-brand-100">{greet}, <span className="font-bold text-white">{data.me.call_name}</span></p>
-            <h1 className="font-display text-[2.7rem] font-bold leading-none">{dateIn(now, code, { weekday: 'long' })}</h1>
+            <h1 className="break-words font-display text-[clamp(1.9rem,9vw,2.7rem)] font-bold leading-none">{dateIn(now, code, { weekday: 'long' })}</h1>
             <p className="mt-1 text-xl text-brand-100">{dateIn(now, code, { day: 'numeric', month: 'long' })} · <span className="font-bold text-sun-500">{timeIn(now, code)}</span></p>
           </div>
         </div>
@@ -534,8 +534,8 @@ function DoseRow({ d, t, faded }) {
   const food = t(`food_${d.food}`);
   return (
     <li className={`flex items-center gap-3 py-3 ${faded ? 'opacity-50' : ''}`}>
-      <span className="relative flex h-20 w-24 shrink-0 items-center justify-center rounded-2xl bg-paper-2">
-        <PillStack d={d} size={44} />
+      <span className="relative flex h-16 w-[4.5rem] shrink-0 items-center justify-center rounded-2xl bg-paper-2">
+        <PillStack d={d} size={36} />
         <span className="absolute -end-2 -top-2 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-white text-2xl shadow-soft">
           <CategoryBadge d={d} size="text-2xl" />
         </span>
@@ -561,12 +561,12 @@ function NowCard({ t, code, current, next, lastTaken, data, now, onAct, onSkip, 
       <section aria-labelledby="now-title" className="animate-pop rounded-[2rem] border-2 border-brand-200 bg-white p-4 shadow-lift sm:p-6">
         <h2 id="now-title" className="font-display text-[1.8rem] font-semibold leading-tight">{t('time_for')}</h2>
         <div className="mt-3 flex items-center gap-3 rounded-2xl bg-paper px-3 py-2">
-          <span className="text-4xl leading-none" aria-hidden>{slotEmoji(current)}</span>
+          <span className="shrink-0 text-4xl leading-none" aria-hidden>{slotEmoji(current)}</span>
           <div className="min-w-0 flex-1">
-            <p className="text-xl font-bold text-brand-700">{slotLabel(current, t)}</p>
+            <p className="text-xl font-bold leading-tight text-brand-700 [overflow-wrap:anywhere]">{slotLabel(current, t)}</p>
             <p className="text-lg text-ink-2">{timeIn(current.time, code)}</p>
           </div>
-          <ClockFace time={current.time} size={56} />
+          <span className="shrink-0"><ClockFace time={current.time} size={48} /></span>
         </div>
         {current.status === 'snoozed' ? (
           <p className="mt-3 rounded-2xl bg-calm-50 px-4 py-2 text-lg font-semibold text-calm-800">⏰ {t('snoozed_until', { time: timeIn(snoozedUntil, code) })}</p>
