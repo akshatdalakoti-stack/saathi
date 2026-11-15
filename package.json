@@ -1,0 +1,32 @@
+{
+  "name": "saathi",
+  "version": "1.0.0",
+  "description": "Saathi - an elder-first medication and care platform where the elderly person stays in charge",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,green \"node --watch server/index.js --dev\" \"vite --strictPort\"",
+    "build": "vite build",
+    "start": "node server/index.js",
+    "seed": "node server/seed.js --reset"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "nodemailer": "^7.0.13"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "@vitejs/plugin-react": "^5.2.0",
+    "concurrently": "^9.2.5",
+    "lucide-react": "^1.73.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5",
+    "tailwindcss": "^4.3.5",
+    "vite": "^7.3.8"
+  }
+}

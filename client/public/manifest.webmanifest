@@ -1,0 +1,12 @@
+{
+  "name": "Saathi",
+  "short_name": "Saathi",
+  "description": "Medicines, health routines and family care, with the elder in charge.",
+  "start_url": "/elder",
+  "display": "standalone",
+  "background_color": "#F6F3EC",
+  "theme_color": "#0E3B34",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

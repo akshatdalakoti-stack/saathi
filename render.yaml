@@ -1,0 +1,28 @@
+# Render Blueprint: in the Render dashboard choose New > Blueprint and pick this repository.
+# Render's free plan blocks SMTP, so real emails go out through Brevo's HTTPS API (BREVO_API_KEY).
+services:
+  - type: web
+    name: saathi
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NODE_ENV
+        value: production
+      - key: TZ
+        value: Asia/Kolkata
+      - key: DEMO_MODE
+        value: "true"
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: BREVO_API_KEY
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+      - key: DEMO_EMAIL
+        sync: false
