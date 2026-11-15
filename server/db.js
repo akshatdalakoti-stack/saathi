@@ -8,7 +8,8 @@ const DB_PATH = process.env.DB_PATH || path.join(process.cwd(), 'data', 'saathi.
 fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });
 
 export const db = new DatabaseSync(DB_PATH);
-db.exec('PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;');
+// Wait up to 5 s for a lock instead of failing at once (e.g. two processes starting together).
+db.exec('PRAGMA busy_timeout = 5000; PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;');
 
 db.exec(`
 CREATE TABLE IF NOT EXISTS profiles (
