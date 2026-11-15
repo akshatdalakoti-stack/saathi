@@ -30,7 +30,7 @@ router.post('/demo/login', (req, res) => {
   res.json({ ok: true, kind: member.role === 'elder' ? 'elder' : 'member' });
 });
 
-router.post('/demo/reset', (req, res) => {
+router.post('/demo/reset', requireActive, (req, res) => {
   if (!DEMO_MODE) throw new HttpError(404, 'Demo is turned off.');
   seedDemo();
   res.json({ ok: true });
