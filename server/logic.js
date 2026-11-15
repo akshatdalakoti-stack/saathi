@@ -55,14 +55,15 @@ export function foodText(food) {
 
 export function amountText(amount, form) {
   const n = Number(amount || 1);
+  const one = n <= 1; // "half tablet", "1 tablet", "2 tablets"
   const unit = {
-    tablet: n === 1 ? 'tablet' : 'tablets',
-    capsule: n === 1 ? 'capsule' : 'capsules',
+    tablet: one ? 'tablet' : 'tablets',
+    capsule: one ? 'capsule' : 'capsules',
     syrup: 'ml',
-    injection: n === 1 ? 'injection' : 'injections',
-    drops: n === 1 ? 'drop' : 'drops',
-    inhaler: n === 1 ? 'puff' : 'puffs',
-  }[form] || (n === 1 ? 'dose' : 'doses');
+    injection: one ? 'injection' : 'injections',
+    drops: one ? 'drop' : 'drops',
+    inhaler: one ? 'puff' : 'puffs',
+  }[form] || (one ? 'dose' : 'doses');
   const shown = n === 0.5 ? 'half' : String(n);
   return `${shown} ${unit}`;
 }

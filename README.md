@@ -160,6 +160,8 @@ docs/                  demo GIF and MP4, screenshots
 ```
 
 ### Testing
+`npm test` runs the **unit tests** in `tests/` with Node's built-in test runner. They cover BP and sugar safe ranges, routine labels, medicine categories, medicine validation, refill forecasts and the language fallback.
+
 `scripts/e2e.mjs` runs **42 end-to-end checks** against a running server. They cover access and permissions, elder approval, PIN lockout, the escalation ladder and one-tap email links, Hindi emails, voice intents in Tamil and Bengali, health alerts, refill pickup, the weekly summary, the visit sheet and the emergency card. All 42 pass on the live site.
 
 ```bash
