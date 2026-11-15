@@ -140,7 +140,10 @@ client/                React app: elder screen, family dashboard, visit sheet
   public/sw.js         service worker for offline use
 shared/                medicine categories and languages (used by client and server)
 server/
-  index.js             Express app: API, email action pages, built client
+  index.js             Express app: security headers, API, email action pages, built client
+  routes.js            mounts the API route modules below
+  routes/              one small module per area: auth, elder, care, medicines, health,
+                       visits, settings, demo, plus shared helpers
   db.js                SQLite schema and migrations
   auth.js              PIN and passcode hashing (scrypt), sessions, lockout, permissions
   logic.js             doses, routine labels, adherence, insights, proposals and approvals
