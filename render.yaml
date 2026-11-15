@@ -18,11 +18,8 @@ services:
         value: Asia/Kolkata
       - key: DEMO_MODE
         value: "true"
+      # The only secret needed to start. Paste it when Render asks.
       - key: GEMINI_API_KEY
         sync: false
-      - key: BREVO_API_KEY
-        sync: false
-      - key: MAIL_FROM
-        sync: false
-      - key: DEMO_EMAIL
-        sync: false
+      # For real emails later, add BREVO_API_KEY, MAIL_FROM (and optionally DEMO_EMAIL)
+      # in the service's Environment tab. Until then, emails go to the in-app outbox.
