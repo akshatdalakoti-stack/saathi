@@ -9,8 +9,6 @@ Problem statement: *Elderly Care & Medication Management Platform*.
 |---|---|
 | 🌐 **Live demo** | https://saathi-d7zs.onrender.com |
 | 🎬 **Demo video** | [Watch below](#demo) · [download the MP4](docs/saathi-demo.mp4) |
-| 💻 **Code** | https://github.com/akshatdalakoti-stack/saathi |
-| 💼 **LinkedIn post** | https://www.linkedin.com/in/akshat-dalakoti-27a395350/recent-activity/all/ |
 
 > The live demo runs on Render's free plan. If nobody has opened it for 15 minutes it sleeps, so the **first load can take about 50 seconds**. After that it's instant.
 
